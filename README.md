@@ -2,7 +2,7 @@
 Hudge Template Engine by - Fahid Mohammad
 
 ### Description
-Hudge is a lightweight JavaScript template engine with a footprint of 1kb inspired by the article writen by [Krasimir].
+Hudge is a lightweight JavaScript template engine with a footprint of 1kb inspired by the article writen by [Krasimir Tsone].
 
 ### Basic Usage
 Include source to your project
@@ -37,4 +37,4 @@ $.get('template.hudge',{},function(template){
   target.empty().append(template);
 });
 ```
-[Krasimir]: <http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line>
+[Krasimir Tsone]: <http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line>
