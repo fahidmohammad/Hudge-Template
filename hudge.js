@@ -69,7 +69,7 @@
             }
         );
     };
-    hudge.arg = "o";
+    hudge.arg = "_h";
     hudge.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
         ",include=function(s,d){_s+=hudge(s,d);}";
     if (typeof define === "function" && define.amd) {
