@@ -12,25 +12,25 @@
 
 (function ($) {
     "use strict";
-    var tmpl = function (str, data) {
-        var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
-                tmpl(tmpl.load(str)) :
+    var hudge = function (str, data) {
+        var f = !/[^\w\-\.:]/.test(str) ? hudge.cache[str] = hudge.cache[str] ||
+                hudge(hudge.load(str)) :
                     new Function(
-                        tmpl.arg + ',tmpl',
-                        "var _e=tmpl.encode" + tmpl.helper + ",_s='" +
-                            str.replace(tmpl.regexp, tmpl.func) +
+                        hudge.arg + ',hudge',
+                        "var _e=hudge.encode" + hudge.helper + ",_s='" +
+                            str.replace(hudge.regexp, hudge.func) +
                             "';return _s;"
                     );
-        return data ? f(data, tmpl) : function (data) {
-            return f(data, tmpl);
+        return data ? f(data, hudge) : function (data) {
+            return f(data, hudge);
         };
     };
-    tmpl.cache = {};
-    tmpl.load = function (id) {
+    hudge.cache = {};
+    hudge.load = function (id) {
         return document.getElementById(id).innerHTML;
     };
-    tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
-    tmpl.func = function (s, p1, p2, p3, p4, p5) {
+    hudge.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
+    hudge.func = function (s, p1, p2, p3, p4, p5) {
         if (p1) { // whitespace, quote and backspace in HTML context
             return {
                 "\n": "\\n",
@@ -52,31 +52,31 @@
             return "_s+='";
         }
     };
-    tmpl.encReg = /[<>&"'\x00]/g;
-    tmpl.encMap = {
+    hudge.encReg = /[<>&"'\x00]/g;
+    hudge.encMap = {
         "<"   : "&lt;",
         ">"   : "&gt;",
         "&"   : "&amp;",
         "\""  : "&quot;",
         "'"   : "&#39;"
     };
-    tmpl.encode = function (s) {
+    hudge.encode = function (s) {
         /*jshint eqnull:true */
         return (s == null ? "" : "" + s).replace(
-            tmpl.encReg,
+            hudge.encReg,
             function (c) {
-                return tmpl.encMap[c] || "";
+                return hudge.encMap[c] || "";
             }
         );
     };
-    tmpl.arg = "o";
-    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
-        ",include=function(s,d){_s+=tmpl(s,d);}";
+    hudge.arg = "o";
+    hudge.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
+        ",include=function(s,d){_s+=hudge(s,d);}";
     if (typeof define === "function" && define.amd) {
         define(function () {
-            return tmpl;
+            return hudge;
         });
     } else {
-        $.tmpl = tmpl;
+        $.hudge = hudge;
     }
 }(this));
